@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.speech.RecognizerIntent;
-import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Switch;
@@ -37,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
         final ImageButton bluetooth = (ImageButton) findViewById(R.id.bluetooth);
         final ImageButton vocal = (ImageButton) findViewById(R.id.vocal);
-        final Switch lama_dx = (Switch) findViewById(R.id.lama_dx);
-        final Switch lama_sx = (Switch) findViewById(R.id.lama_sx);
+        final Switch weapon = (Switch) findViewById(R.id.lama_dx);
+        final Switch turbo = (Switch) findViewById(R.id.turbo);
         final JoyStickView joy = (JoyStickView) findViewById(R.id.joy);
 
         blueComm = new BluetoothCommunication(context, activity);
@@ -50,17 +49,17 @@ public class MainActivity extends AppCompatActivity {
 
         // Creazione dei pulsanti e elementi visivi
 
-//        lama_dx.setOnClickListener(new View.OnClickListener() {
-//          @Override
-//            public void onClick(View v) {
-//                blueComm.lamaDx();
-//            }
-//        });
+       turbo.setOnClickListener(new View.OnClickListener() {
+          @Override
+            public void onClick(View v) {
+                blueComm.turbo();
+            }
+        });
 
-//        lama_sx.setOnClickListener(new View.OnClickListener() {
+        weapon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                blueComm.lamaSx();
+                blueComm.weapon();
             }
         });
 

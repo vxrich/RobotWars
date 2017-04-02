@@ -15,7 +15,7 @@ public class VocalTranslator {
     }
 
     // Stringhe delle parole che vengono cercate
-    private String comandi[] = {"raggiungimi", "reach me", "zitto", "shut up", "destra", "sinistra", "left", "right", "vieni", "come", "seguimi", "follow", "gira a destra", "gira a sinistra", "turn left", "turn right" };
+    private String comandi[] = {"attacca", "attack", "fermo", "stop", "fermati" };
 
     public void translate (String text)
     {
@@ -26,17 +26,16 @@ public class VocalTranslator {
                 switch(comandi[i])
                 {
 
-                    case "destra":
-                    case "right":
-                    case "turn right":
+                    case "attaca":
+                    case "attack":
                     {
-                        blue.move('c','c');
+                        blue.attack();
                         break;
                     }
 
-                    case "sinistra":
-                    case "left":
-                    case "turn left":
+                    case "fermo":
+                    case "stop":
+                    case "fermati":
                     {
                         blue.move('c','c');
                         break;

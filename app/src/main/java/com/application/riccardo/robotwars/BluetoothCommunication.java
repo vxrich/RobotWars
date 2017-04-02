@@ -186,11 +186,7 @@ public class BluetoothCommunication {
 
     public void attack () { send("a;");}
 
-    public void turn() { send("t;");}
+    public void turbo (){ send("t;");}
 
-    public void lamaDx (){ send("d;");}
-
-    public void lamaSx (){ send("s;");}
-
-    public void emp () { send("e");}
+    public void weapon () { send("w;");}
 }
