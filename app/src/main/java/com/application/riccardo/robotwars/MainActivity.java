@@ -34,16 +34,15 @@ public class MainActivity extends AppCompatActivity {
         final Context context = getApplicationContext();
         final Activity activity = this;
 
+        setContentView(R.layout.activity_main);
+
         final ImageButton bluetooth = (ImageButton) findViewById(R.id.bluetooth);
-        final ImageButton vocal = (ImageButton) findViewById(R.id.vocal);
-        final Switch weapon = (Switch) findViewById(R.id.lama_dx);
+        final Switch weapon = (Switch) findViewById(R.id.weapon);
         final Switch turbo = (Switch) findViewById(R.id.turbo);
         final JoyStickView joy = (JoyStickView) findViewById(R.id.joy);
 
         blueComm = new BluetoothCommunication(context, activity);
         translator  = new VocalTranslator(blueComm);
-
-        setContentView(R.layout.activity_main);
 
         Toast.makeText(getApplicationContext(), ""+(char)(-10), Toast.LENGTH_SHORT).show();
 
@@ -52,7 +51,16 @@ public class MainActivity extends AppCompatActivity {
        turbo.setOnClickListener(new View.OnClickListener() {
           @Override
             public void onClick(View v) {
-                blueComm.turbo();
+
+              if(trans.getTurbo() == 0)
+              {
+                  trans.setTurbo(1);
+              }
+              else
+              {
+                  trans.setTurbo(0);
+              }
+
             }
         });
 
@@ -70,17 +78,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        vocal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startSpeechToText();
-            }
-        });
-
         joy.setOnJoystickMoveListener(new JoyStickView.OnJoystickMoveListener() {
             @Override
             public void onValueChanged(int angle, int power, int direction) {
-                blueComm.move(trans.getCharSpeed(power, angle), trans.getCharRotation(power, angle));
+                blueComm.move(trans.getSpeed(power, angle), trans.getRotation(power, angle));
             }
         }, 100);
 

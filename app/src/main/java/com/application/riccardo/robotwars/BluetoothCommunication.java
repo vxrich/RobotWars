@@ -1,5 +1,9 @@
 package com.application.riccardo.robotwars;
 
+/**
+ * Created by Riccardo on 22/12/16.
+ */
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -10,8 +14,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.widget.Toast;
 
-import com.application.riccardo.robotwars.R;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
@@ -20,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-
 
 // Classe per la gestione della connessione e invio dei messaggi via Bluetooth
 public class BluetoothCommunication {
@@ -92,7 +93,7 @@ public class BluetoothCommunication {
 
                     try {
                         // Istanzia un BluetoothSocket per connettersi al BluetoothDevice selezionato
-                        sock = blueDev.createInsecureRfcommSocketToServiceRecord( UUID.fromString("94f39d29-7d6d-437d-973b-fba39e49d4ee") );
+                        sock = blueDev.createInsecureRfcommSocketToServiceRecord( UUID.fromString("00001101-0000-1000-8000-00805F9B34FB") );
 
                         sock.connect();
 
@@ -111,12 +112,15 @@ public class BluetoothCommunication {
 
         dialog.show();
 
+
+
+
     }
 
     // Metodo per resettare il Bluetooth
     private void resetBlue ()
     {
-       blueAdapter.disable();
+        blueAdapter.disable();
 
         while (blueAdapter.isEnabled())
             try {
@@ -175,13 +179,26 @@ public class BluetoothCommunication {
     public void move (char charSpeed, char charRotation)
     {
         StringBuilder sb = new StringBuilder();
+        char neg =(char) -100;
+        char pos = (char) 100;
 
         sb.append('m');
-
-        sb.append(charSpeed);
-        sb.append(charRotation);
+        sb.append(neg);
+        sb.append(pos);
+//        sb.append(charSpeed);
+//        sb.append(charRotation);
+        sb.append('.');
 
         send(sb.toString());
+
+    }
+
+    public void move (int speed, int rotation)
+    {
+        int spd = (int) speed/10;
+        int rot = (int) rotation/10;
+        String str = String.format("m:%d:%d", spd, rot);
+        send(str);
     }
 
     public void attack () { send("a;");}

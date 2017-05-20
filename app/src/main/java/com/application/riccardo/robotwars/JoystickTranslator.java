@@ -7,6 +7,10 @@ package com.application.riccardo.robotwars;
 // Interfaccia per i metodi di restituzione della velocita' e rotazione
 public interface JoystickTranslator {
 
+    int getTurbo();
+
+    void setTurbo(int value);
+
     int getSpeed(double joyPower, double joyAngle);
 
     int getRotation(double joyPower, double joyAngle);
