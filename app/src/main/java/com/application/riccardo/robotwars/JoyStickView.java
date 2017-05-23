@@ -166,7 +166,7 @@ public class JoyStickView extends View implements Runnable {
             thread.interrupt();
             if (onJoystickMoveListener != null)
                 onJoystickMoveListener.onValueChanged(getAngle(), getPower(),
-                        getDirection());
+                        getDirection(), getXPos(), getYPos());
         }
         if (onJoystickMoveListener != null
                 && event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -177,7 +177,7 @@ public class JoyStickView extends View implements Runnable {
             thread.start();
             if (onJoystickMoveListener != null)
                 onJoystickMoveListener.onValueChanged(getAngle(), getPower(),
-                        getDirection());
+                        getDirection(), getXPos(), getYPos());
         }
         return true;
     }
@@ -243,6 +243,14 @@ public class JoyStickView extends View implements Runnable {
         return direction;
     }
 
+    private int getXPos(){
+        return xPosition;
+    }
+
+    private int getYPos(){
+        return yPosition;
+    }
+
     public void setOnJoystickMoveListener(OnJoystickMoveListener listener,
                                           long repeatInterval) {
         this.onJoystickMoveListener = listener;
@@ -250,7 +258,7 @@ public class JoyStickView extends View implements Runnable {
     }
 
     public interface OnJoystickMoveListener {
-        public void onValueChanged(int angle, int power, int direction);
+        public void onValueChanged(int angle, int power, int direction, int x, int y);
     }
 
     @Override
@@ -260,7 +268,7 @@ public class JoyStickView extends View implements Runnable {
                 public void run() {
                     if (onJoystickMoveListener != null)
                         onJoystickMoveListener.onValueChanged(getAngle(),
-                                getPower(), getDirection());
+                                getPower(), getDirection(), getXPos(), getYPos());
                 }
             });
             try {

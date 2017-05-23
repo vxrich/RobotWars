@@ -19,8 +19,6 @@ public class MainActivity extends AppCompatActivity {
 
     private BluetoothCommunication blueComm;
 
-    private VocalTranslator translator;
-
     private JoystickTranslator trans = new JoystickTrigonometricTranslator();
 
     private final int SPEECH_RECOGNITION_CODE = 1;
@@ -42,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         final JoyStickView joy = (JoyStickView) findViewById(R.id.joy);
 
         blueComm = new BluetoothCommunication(context, activity);
-        translator  = new VocalTranslator(blueComm);
 
         Toast.makeText(getApplicationContext(), ""+(char)(-10), Toast.LENGTH_SHORT).show();
 
@@ -80,48 +77,13 @@ public class MainActivity extends AppCompatActivity {
 
         joy.setOnJoystickMoveListener(new JoyStickView.OnJoystickMoveListener() {
             @Override
-            public void onValueChanged(int angle, int power, int direction) {
-                blueComm.move(trans.getSpeed(power, angle), trans.getRotation(power, angle));
+            public void onValueChanged(int angle, int power, int direction, int x, int y) {
+                blueComm.move(trans.getCharSpeed(power, angle), trans.getCharRotation(power, angle));
+                //blueComm.move2(trans.getSpeed(power, angle), trans.getRotation(power, angle));
+                //blueComm.move(x,y);
             }
-        }, 100);
+        }, 300);
 
     }
-
-    //Metodo per l'apertura degli intent dei comandi vocali
-    private void startSpeechToText()
-    {
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
-                "Sono in ascolto...");
-        try {
-            startActivityForResult(intent, SPEECH_RECOGNITION_CODE);
-        } catch (ActivityNotFoundException a) {
-            Toast.makeText(getApplicationContext(),
-                    "Mi dispiace! Il riconoscimento vocale non e' supportato dal tuo dispositivo.",
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    //Metodo per il riconoscimento del parlato e conversione in stringa
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case SPEECH_RECOGNITION_CODE: {
-                if (resultCode == RESULT_OK && null != data) {
-                    ArrayList<String> result = data
-                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    message = result.get(0);
-                    translator.translate(message);
-                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                }
-                break;
-            }
-        }
-    }
-
 
 }

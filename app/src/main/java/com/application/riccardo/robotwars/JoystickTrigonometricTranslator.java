@@ -52,7 +52,9 @@ public class JoystickTrigonometricTranslator implements JoystickTranslator {
 
     public char getCharRotation(double joyPower, double joyAngle)
     {
-            return (char)((Math.sin(joyAngle/RAD)*joyPower));
+            return (char)((Math.cos(joyAngle/RAD)*joyPower));
 
     }
+
+
 }

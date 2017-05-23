@@ -182,28 +182,21 @@ public class BluetoothCommunication {
         char neg =(char) -100;
         char pos = (char) 100;
 
-        sb.append('m');
         sb.append(neg);
+        sb.append(":");
         sb.append(pos);
-//        sb.append(charSpeed);
-//        sb.append(charRotation);
-        sb.append('.');
 
         send(sb.toString());
-
     }
 
-    public void move (int speed, int rotation)
+    public void move2 (int speed, int rotation)
     {
-        int spd = (int) speed/10;
-        int rot = (int) rotation/10;
-        String str = String.format("m:%d:%d", spd, rot);
-        send(str);
+        send(String.format("%d:%d", speed, rotation));
     }
 
-    public void attack () { send("a;");}
-
-    public void turbo (){ send("t;");}
+    public void move (int x, int y){
+        send(String.format("%d:%d", x,y));
+    }
 
     public void weapon () { send("w;");}
 }
