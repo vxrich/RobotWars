@@ -12,6 +12,7 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+
 
 // Classe per la gestione della connessione e invio dei messaggi via Bluetooth
 public class BluetoothCommunication {
@@ -185,17 +187,21 @@ public class BluetoothCommunication {
         sb.append(neg);
         sb.append(":");
         sb.append(pos);
+        String str = sb.toString();
+        Log.d("Value", str);
 
-        send(sb.toString());
+        send(str);
     }
 
     public void move2 (int speed, int rotation)
     {
         send(String.format("%d:%d", speed, rotation));
+        Log.d("Value", String.format("%d:%d", speed, rotation));
     }
 
     public void move (int x, int y){
-        send(String.format("%d:%d", x,y));
+        send(String.format("%d:%d;", x,y));
+        Log.d("Value", String.format("%d:%d;", x,y));
     }
 
     public void weapon () { send("w;");}

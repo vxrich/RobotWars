@@ -78,9 +78,9 @@ public class MainActivity extends AppCompatActivity {
         joy.setOnJoystickMoveListener(new JoyStickView.OnJoystickMoveListener() {
             @Override
             public void onValueChanged(int angle, int power, int direction, int x, int y) {
-                blueComm.move(trans.getCharSpeed(power, angle), trans.getCharRotation(power, angle));
+                //blueComm.move(trans.getCharSpeed(power, angle), trans.getCharRotation(power, angle));
                 //blueComm.move2(trans.getSpeed(power, angle), trans.getRotation(power, angle));
-                //blueComm.move(x,y);
+                blueComm.move(angle,power);
             }
         }, 300);
 
