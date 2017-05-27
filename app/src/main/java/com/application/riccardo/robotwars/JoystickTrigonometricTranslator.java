@@ -24,10 +24,10 @@ public class JoystickTrigonometricTranslator implements JoystickTranslator {
     public int getSpeed(double joyPower, double joyAngle)
     {
         if (turbo_enable == 0) {
-            return (int) ((Math.sin(joyAngle / RAD) * joyPower)/1.5);
+            return (int) ((Math.sin(joyAngle / RAD) * joyPower)*1.8);
         }
         else{
-            return (int) (Math.sin(joyAngle / RAD) * joyPower);
+            return (int) ((Math.sin(joyAngle / RAD) * joyPower)*2.55);
         }
     }
 

@@ -195,8 +195,8 @@ public class BluetoothCommunication {
 
     public void move2 (int speed, int rotation)
     {
-        send(String.format("%d:%d", speed, rotation));
-        Log.d("Value", String.format("%d:%d", speed, rotation));
+        send(String.format("%d:%d;", speed, rotation));
+        Log.d("Value", String.format("%d:%d;", speed, rotation));
     }
 
     public void move (int x, int y){

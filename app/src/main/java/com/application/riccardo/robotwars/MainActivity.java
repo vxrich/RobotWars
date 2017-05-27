@@ -79,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onValueChanged(int angle, int power, int direction, int x, int y) {
                 //blueComm.move(trans.getCharSpeed(power, angle), trans.getCharRotation(power, angle));
-                //blueComm.move2(trans.getSpeed(power, angle), trans.getRotation(power, angle));
-                blueComm.move(angle,power);
+                blueComm.move2(trans.getSpeed(power, angle), trans.getRotation(power, angle));
+                //blueComm.move(angle,power);
             }
         }, 300);
 
